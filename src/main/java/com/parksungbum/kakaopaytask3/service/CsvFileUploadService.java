@@ -71,8 +71,8 @@ public class CsvFileUploadService {
 
     private void saveInstitution(List<String> header) {
         for (int i = START_INSTITUTION_INDEX; i < header.size(); ++i) {
-            String institutionName = InstitutionCode.getInstitutionName(header.get(i));
-            String institutionCode = InstitutionCode.getInstitutionCode(header.get(i));
+            String institutionName = InstitutionCode.convertInstitutionName(header.get(i));
+            String institutionCode = InstitutionCode.convertInstitutionCode(header.get(i));
             institutionService.save(institutionName, institutionCode);
         }
     }
