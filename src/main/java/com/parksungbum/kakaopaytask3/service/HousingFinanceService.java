@@ -1,9 +1,9 @@
 package com.parksungbum.kakaopaytask3.service;
 
-import com.parksungbum.kakaopaytask3.domain.HousingFinance;
-import com.parksungbum.kakaopaytask3.domain.HousingFinanceRepository;
-import com.parksungbum.kakaopaytask3.domain.Month;
-import com.parksungbum.kakaopaytask3.domain.Year;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinanceRepository;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.Month;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.Year;
 import org.springframework.stereotype.Service;
 
 @Service

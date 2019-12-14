@@ -1,4 +1,6 @@
-package com.parksungbum.kakaopaytask3.domain;
+package com.parksungbum.kakaopaytask3.domain.housingfinance;
+
+import com.parksungbum.kakaopaytask3.domain.BaseEntity;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;

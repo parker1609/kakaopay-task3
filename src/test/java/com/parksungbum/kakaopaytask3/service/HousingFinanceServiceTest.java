@@ -1,7 +1,7 @@
 package com.parksungbum.kakaopaytask3.service;
 
-import com.parksungbum.kakaopaytask3.domain.HousingFinance;
-import com.parksungbum.kakaopaytask3.domain.HousingFinanceRepository;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinanceRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,6 +1,7 @@
-package com.parksungbum.kakaopaytask3.service;
+package com.parksungbum.kakaopaytask3.service.assembler;
 
-import com.parksungbum.kakaopaytask3.domain.Institution;
+import com.parksungbum.kakaopaytask3.domain.institution.Institution;
+import com.parksungbum.kakaopaytask3.service.dto.InstitutionResponseDto;
 
 public class InstitutionAssembler {
 

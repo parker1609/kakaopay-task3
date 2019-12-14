@@ -1,4 +1,4 @@
-package com.parksungbum.kakaopaytask3.service;
+package com.parksungbum.kakaopaytask3.service.dto;
 
 public class FileUploadResponseDto {
     private String fileName;

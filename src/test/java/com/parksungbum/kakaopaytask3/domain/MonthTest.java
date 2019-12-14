@@ -1,6 +1,7 @@
 package com.parksungbum.kakaopaytask3.domain;
 
 import com.parksungbum.kakaopaytask3.domain.exception.InvalidMonthException;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.Month;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

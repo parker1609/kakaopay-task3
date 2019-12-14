@@ -1,6 +1,7 @@
 package com.parksungbum.kakaopaytask3.domain;
 
 import com.parksungbum.kakaopaytask3.domain.exception.NotFoundInstitutionException;
+import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

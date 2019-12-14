@@ -9,5 +9,4 @@ public class KakaopayTask3Application {
     public static void main(String[] args) {
         SpringApplication.run(KakaopayTask3Application.class, args);
     }
-
 }

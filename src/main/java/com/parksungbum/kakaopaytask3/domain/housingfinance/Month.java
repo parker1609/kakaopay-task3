@@ -1,4 +1,4 @@
-package com.parksungbum.kakaopaytask3.domain;
+package com.parksungbum.kakaopaytask3.domain.housingfinance;
 
 import com.parksungbum.kakaopaytask3.domain.exception.InvalidMonthException;
 

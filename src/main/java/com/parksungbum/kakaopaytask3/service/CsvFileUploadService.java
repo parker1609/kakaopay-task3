@@ -1,8 +1,9 @@
 package com.parksungbum.kakaopaytask3.service;
 
-import com.parksungbum.kakaopaytask3.domain.HousingFinance;
-import com.parksungbum.kakaopaytask3.domain.Institution;
-import com.parksungbum.kakaopaytask3.domain.InstitutionCode;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.institution.Institution;
+import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
+import com.parksungbum.kakaopaytask3.service.dto.FileUploadResponseDto;
 import com.parksungbum.kakaopaytask3.support.parser.CsvFileParser;
 import com.parksungbum.kakaopaytask3.support.parser.IntegerConverter;
 import org.slf4j.Logger;

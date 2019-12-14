@@ -1,8 +1,10 @@
 package com.parksungbum.kakaopaytask3.service;
 
-import com.parksungbum.kakaopaytask3.domain.Institution;
-import com.parksungbum.kakaopaytask3.domain.InstitutionRepository;
 import com.parksungbum.kakaopaytask3.domain.exception.NotFoundInstitutionException;
+import com.parksungbum.kakaopaytask3.domain.institution.Institution;
+import com.parksungbum.kakaopaytask3.domain.institution.InstitutionRepository;
+import com.parksungbum.kakaopaytask3.service.assembler.InstitutionAssembler;
+import com.parksungbum.kakaopaytask3.service.dto.InstitutionResponseDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

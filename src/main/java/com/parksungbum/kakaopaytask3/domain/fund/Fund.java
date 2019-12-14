@@ -1,4 +1,8 @@
-package com.parksungbum.kakaopaytask3.domain;
+package com.parksungbum.kakaopaytask3.domain.fund;
+
+import com.parksungbum.kakaopaytask3.domain.BaseEntity;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 
 import javax.persistence.*;
 

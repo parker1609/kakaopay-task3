@@ -1,5 +1,8 @@
 package com.parksungbum.kakaopaytask3.domain;
 
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.Month;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.Year;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

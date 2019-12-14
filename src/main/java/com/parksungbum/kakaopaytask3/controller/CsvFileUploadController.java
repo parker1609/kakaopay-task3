@@ -1,7 +1,7 @@
 package com.parksungbum.kakaopaytask3.controller;
 
 import com.parksungbum.kakaopaytask3.service.CsvFileUploadService;
-import com.parksungbum.kakaopaytask3.service.FileUploadResponseDto;
+import com.parksungbum.kakaopaytask3.service.dto.FileUploadResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
