@@ -13,8 +13,8 @@ public class HousingFinanceService {
         this.housingFinanceRepository = housingFinanceRepository;
     }
 
-    public void save(int year, int month) {
+    public HousingFinance save(int year, int month) {
         HousingFinance housingFinance = new HousingFinance(year, month);
-        housingFinanceRepository.save(housingFinance);
+        return housingFinanceRepository.save(housingFinance);
     }
 }

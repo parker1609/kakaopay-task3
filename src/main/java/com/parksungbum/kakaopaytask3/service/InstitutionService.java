@@ -13,8 +13,13 @@ public class InstitutionService {
         this.institutionRepository = institutionRepository;
     }
 
-    public void save(String institutionName, String institutionCode) {
+    public Institution save(String institutionName, String institutionCode) {
         Institution institution = new Institution(institutionName, institutionCode);
-        institutionRepository.save(institution);
+        return institutionRepository.save(institution);
+    }
+
+    public Institution findById(Long institutionId) {
+        return institutionRepository.findById(institutionId)
+                .orElseThrow(IllegalArgumentException::new);
     }
 }

@@ -15,8 +15,8 @@ public class FundService {
         this.fundRepository = fundRepository;
     }
 
-    public void save(HousingFinance housingFinance, Institution institution, int amount) {
+    public Fund save(HousingFinance housingFinance, Institution institution, int amount) {
         Fund fund = new Fund(housingFinance, institution, amount);
-        fundRepository.save(fund);
+        return fundRepository.save(fund);
     }
 }
