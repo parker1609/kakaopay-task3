@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -31,6 +33,9 @@ public class InstitutionServiceTest {
 
     @Mock
     private Institution institution;
+
+    @Mock
+    private List<Institution> institutions = new ArrayList<>();
 
     @Test
     @DisplayName("Institution 엔티티를 정상적으로 저장한다.")
@@ -59,5 +64,15 @@ public class InstitutionServiceTest {
 
         assertThrows(NotFoundInstitutionException.class,
                 () -> institutionService.findById(INSTITUTION_ID));
+    }
+
+    @Test
+    @DisplayName("저장되어 있는 전체 Institution 객체를 정상적으로 조회한다.")
+    void find_institutions() {
+        given(institutionRepository.findAll()).willReturn(institutions);
+
+        institutionService.findAll();
+
+        verify(institutionRepository).findAll();
     }
 }
