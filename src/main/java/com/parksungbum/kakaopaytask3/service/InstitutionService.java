@@ -2,6 +2,7 @@ package com.parksungbum.kakaopaytask3.service;
 
 import com.parksungbum.kakaopaytask3.domain.Institution;
 import com.parksungbum.kakaopaytask3.domain.InstitutionRepository;
+import com.parksungbum.kakaopaytask3.domain.exception.NotFoundInstitutionException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,7 @@ public class InstitutionService {
 
     public Institution findById(Long institutionId) {
         return institutionRepository.findById(institutionId)
-                .orElseThrow(IllegalArgumentException::new);
+                .orElseThrow(NotFoundInstitutionException::new);
     }
 
     public List<InstitutionResponseDto> findAll() {
