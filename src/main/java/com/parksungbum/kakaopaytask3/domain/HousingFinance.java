@@ -7,14 +7,17 @@ import javax.persistence.Entity;
 public class HousingFinance extends BaseEntity {
 
     @Embedded
-    private final Year year;
+    private Year year;
 
     @Embedded
-    private final Month month;
+    private Month month;
 
     public HousingFinance(Year year, Month month) {
         this.year = year;
         this.month = month;
+    }
+
+    private HousingFinance() {
     }
 
     public Year getYear() {

@@ -6,18 +6,21 @@ import javax.persistence.*;
 public class Fund extends BaseEntity {
 
     @ManyToOne
-    private final HousingFinance housingFinance;
+    private HousingFinance housingFinance;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "institution_id")
-    private final Institution institution;
+    private Institution institution;
 
-    private final int amount;
+    private int amount;
 
     public Fund(HousingFinance housingFinance, Institution institution, int amount) {
         this.housingFinance = housingFinance;
         this.institution = institution;
         this.amount = amount;
+    }
+
+    private Fund() {
     }
 
     public HousingFinance getHousingFinance() {

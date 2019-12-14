@@ -4,11 +4,22 @@ import javax.persistence.Entity;
 
 @Entity
 public class Institution extends BaseEntity {
-    private final String name;
-    private final String code;
+    private String name;
+    private String code;
 
     public Institution(String name, String code) {
         this.name = name;
         this.code = code;
+    }
+
+    private Institution() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCode() {
+        return code;
     }
 }
