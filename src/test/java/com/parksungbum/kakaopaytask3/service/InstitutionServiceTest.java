@@ -28,9 +28,9 @@ public class InstitutionServiceTest {
     private Institution institution;
 
     @Test
-    @DisplayName("CSV 파일로부터 Institution 엔티티를 정상적으로 저장한다.")
+    @DisplayName("Institution 엔티티를 정상적으로 저장한다.")
     void save_institution() {
-        given(institutionRepository.save(institution)).willReturn(institution);
+        given(institutionRepository.save(any(Institution.class))).willReturn(institution);
 
         institutionService.save(INSTITUTION_NAME, INSTITUTION_CODE);
 
