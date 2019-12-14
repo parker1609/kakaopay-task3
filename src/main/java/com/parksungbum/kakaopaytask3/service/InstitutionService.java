@@ -2,7 +2,9 @@ package com.parksungbum.kakaopaytask3.service;
 
 import com.parksungbum.kakaopaytask3.domain.Institution;
 import com.parksungbum.kakaopaytask3.domain.InstitutionRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class InstitutionService {
 
     private final InstitutionRepository institutionRepository;
