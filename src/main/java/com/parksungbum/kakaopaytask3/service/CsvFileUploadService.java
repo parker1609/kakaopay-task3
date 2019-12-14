@@ -4,6 +4,7 @@ import com.parksungbum.kakaopaytask3.domain.HousingFinance;
 import com.parksungbum.kakaopaytask3.domain.Institution;
 import com.parksungbum.kakaopaytask3.domain.InstitutionCode;
 import com.parksungbum.kakaopaytask3.support.parser.CsvFileParser;
+import com.parksungbum.kakaopaytask3.support.parser.IntegerConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,15 +24,18 @@ public class CsvFileUploadService {
     private final HousingFinanceService housingFinanceService;
     private final FundService fundService;
     private final CsvFileParser csvFileParser;
+    private final IntegerConverter integerConverter;
 
     public CsvFileUploadService(final InstitutionService institutionService,
                                 final HousingFinanceService housingFinanceService,
                                 final FundService fundService,
-                                final CsvFileParser csvFileParser) {
+                                final CsvFileParser csvFileParser,
+                                final IntegerConverter integerConverter) {
         this.institutionService = institutionService;
         this.housingFinanceService = housingFinanceService;
         this.fundService = fundService;
         this.csvFileParser = csvFileParser;
+        this.integerConverter = integerConverter;
     }
 
     public FileUploadResponseDto save(MultipartFile csvFile) {
@@ -75,8 +79,8 @@ public class CsvFileUploadService {
 
     private void saveHousingFinanceAndFund(List<List<String>> body) {
         for (List<String> bodyRow : body) {
-            int year = Integer.parseInt(bodyRow.get(YEAR_INDEX));
-            int month = Integer.parseInt(bodyRow.get(MONTH_INDEX));
+            int year = integerConverter.convert(bodyRow.get(YEAR_INDEX));
+            int month = integerConverter.convert(bodyRow.get(MONTH_INDEX));
             HousingFinance housingFinance = housingFinanceService.save(year, month);
             createFundWithLine(bodyRow, housingFinance);
         }
@@ -87,7 +91,7 @@ public class CsvFileUploadService {
             // TODO: 2019/12/14 Institution Id 가져오는 것 좀 더 객체지향적으로 생각해볼 것
             Long institutionId = (long) (i - 1);
             Institution institution = institutionService.findById(institutionId);
-            int amount = Integer.parseInt(bodyRow.get(i));
+            int amount = integerConverter.convert(bodyRow.get(i));
             fundService.save(housingFinance, institution, amount);
         }
     }
