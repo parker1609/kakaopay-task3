@@ -12,13 +12,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CsvFileParser {
-    private static final int START_INDEX = 0;
+    private static final int HEADER_START_INDEX = 0;
+    private static final int BODY_START_INDEX = 1;
     private static final String SPACES_REGEX = "^[\\s]*$";
     private static final Pattern spacePattern = Pattern.compile(SPACES_REGEX);
 
     public List<String> getHeader(InputStream stream) throws IOException {
         List<String[]> results = parse(stream);
-        String[] header = results.get(START_INDEX);
+        String[] header = results.get(HEADER_START_INDEX);
         int startIndexWithoutSpace = getNumberOfSpaceInPrefix(header);
         int endIndexWithoutSpace = header.length - getNumberOfSpaceInSuffix(header);
 
@@ -61,7 +62,7 @@ public class CsvFileParser {
         List<String[]> results = parse(stream);
         List<List<String>> body = new ArrayList<>(new ArrayList<>());
 
-        for (String[] row : results.subList(START_INDEX, results.size())) {
+        for (String[] row : results.subList(BODY_START_INDEX, results.size())) {
             int startIndexWithoutSpace = getNumberOfSpaceInPrefix(row);
             int endIndexWithoutSpace = row.length - getNumberOfSpaceInSuffix(row);
 
