@@ -4,6 +4,9 @@ import com.parksungbum.kakaopaytask3.domain.Institution;
 import com.parksungbum.kakaopaytask3.domain.InstitutionRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class InstitutionService {
 
@@ -21,5 +24,12 @@ public class InstitutionService {
     public Institution findById(Long institutionId) {
         return institutionRepository.findById(institutionId)
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+    public List<InstitutionResponseDto> findAll() {
+        return institutionRepository.findAll().stream()
+                .map(InstitutionAssembler::toResponseDto)
+                .collect(Collectors.toList())
+                ;
     }
 }
