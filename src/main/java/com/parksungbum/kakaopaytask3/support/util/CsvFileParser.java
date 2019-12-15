@@ -1,10 +1,5 @@
 package com.parksungbum.kakaopaytask3.support.util;
 
-import com.opencsv.CSVReader;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -17,9 +12,8 @@ public class CsvFileParser {
     private static final String SPACES_REGEX = "^[\\s]*$";
     private static final Pattern spacePattern = Pattern.compile(SPACES_REGEX);
 
-    public List<String> getHeader(InputStream stream) throws IOException {
-        List<String[]> results = parse(stream);
-        String[] header = results.get(HEADER_START_INDEX);
+    public List<String> parseHeader(List<String[]> csvFileData) {
+        String[] header = csvFileData.get(HEADER_START_INDEX);
         int startIndexWithoutSpace = getNumberOfSpaceInPrefix(header);
         int endIndexWithoutSpace = header.length - getNumberOfSpaceInSuffix(header);
 
@@ -58,11 +52,10 @@ public class CsvFileParser {
         return numberOfSpaceInSuffix;
     }
 
-    public List<List<String>> getBody(InputStream stream) throws IOException {
-        List<String[]> results = parse(stream);
+    public List<List<String>> parseBody(List<String[]> csvFileData) {
         List<List<String>> body = new ArrayList<>(new ArrayList<>());
 
-        for (String[] row : results.subList(BODY_START_INDEX, results.size())) {
+        for (String[] row : csvFileData.subList(BODY_START_INDEX, csvFileData.size())) {
             int startIndexWithoutSpace = getNumberOfSpaceInPrefix(row);
             int endIndexWithoutSpace = row.length - getNumberOfSpaceInSuffix(row);
 
@@ -71,17 +64,5 @@ public class CsvFileParser {
         }
 
         return body;
-    }
-
-    public List<String[]> parse(InputStream stream) throws IOException {
-        List<String[]> results = new ArrayList<>();
-        try (CSVReader reader = new CSVReader(new InputStreamReader(stream))) {
-            String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                results.add(nextLine);
-            }
-        }
-
-        return results;
     }
 }

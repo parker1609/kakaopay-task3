@@ -5,6 +5,7 @@ import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
 import com.parksungbum.kakaopaytask3.service.dto.FileUploadResponseDto;
 import com.parksungbum.kakaopaytask3.support.util.CsvFileParser;
+import com.parksungbum.kakaopaytask3.support.util.CsvFileReader;
 import com.parksungbum.kakaopaytask3.support.util.IntegerConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,24 +25,28 @@ public class CsvFileUploadService {
     private final InstitutionService institutionService;
     private final HousingFinanceService housingFinanceService;
     private final FundService fundService;
+    private final CsvFileReader csvFileReader;
     private final CsvFileParser csvFileParser;
     private final IntegerConverter integerConverter;
 
     public CsvFileUploadService(final InstitutionService institutionService,
                                 final HousingFinanceService housingFinanceService,
                                 final FundService fundService,
+                                final CsvFileReader csvFileReader,
                                 final CsvFileParser csvFileParser,
                                 final IntegerConverter integerConverter) {
         this.institutionService = institutionService;
         this.housingFinanceService = housingFinanceService;
         this.fundService = fundService;
+        this.csvFileReader = csvFileReader;
         this.csvFileParser = csvFileParser;
         this.integerConverter = integerConverter;
     }
 
     public FileUploadResponseDto save(MultipartFile csvFile) {
-        List<String> header = getHeaderInCsvFile(csvFile);
-        List<List<String>> body = getBodyInCsvFile(csvFile);
+        List<String[]> csvFileRows = getCsvFileData(csvFile);
+        List<String> header = csvFileParser.parseHeader(csvFileRows);
+        List<List<String>> body = csvFileParser.parseBody(csvFileRows);
 
         saveInstitution(header);
         saveHousingFinanceAndFund(body);
@@ -52,20 +57,11 @@ public class CsvFileUploadService {
                 csvFile.getSize());
     }
 
-    private List<String> getHeaderInCsvFile(MultipartFile file) {
+    private List<String[]> getCsvFileData(MultipartFile file) {
         try {
-            return csvFileParser.getHeader(file.getInputStream());
+            return csvFileReader.read(file.getInputStream());
         } catch (IOException e) {
-            log.error("CSV file header parsing error : ", e);
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private List<List<String>> getBodyInCsvFile(MultipartFile file) {
-        try {
-            return csvFileParser.getBody(file.getInputStream());
-        } catch (IOException e) {
-            log.error("CSV file body parsing error : ", e);
+            log.error("CSV file read error : ", e);
             throw new IllegalArgumentException();
         }
     }
