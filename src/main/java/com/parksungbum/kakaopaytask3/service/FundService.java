@@ -67,7 +67,7 @@ public class FundService {
         }
     }
 
-    public InstitutionMaxFundResponseDto findInstitutionAndYearOfMaxFund() {
+    public InstitutionMaxFundResponseDto findYearAndInstitutionOfMaxFund() {
         List<Object[]> yearAndInstitutionOfMaxFund = fundRepository.findYearAndInstitutionOfMaxFund();
         List<InstitutionMaxFundResponseDto> institutionMaxFundResponses = new ArrayList<>();
 

@@ -29,7 +29,7 @@ public class FundController {
     @GetMapping("/funds/maximum/institution")
     public ResponseEntity<InstitutionMaxFundResponseDto> showInstitutionAndYearOfMaximumFund() {
         InstitutionMaxFundResponseDto institutionAndYearOfMaxFund =
-                fundService.findInstitutionAndYearOfMaxFund();
+                fundService.findYearAndInstitutionOfMaxFund();
 
         return ResponseEntity.ok(institutionAndYearOfMaxFund);
     }
