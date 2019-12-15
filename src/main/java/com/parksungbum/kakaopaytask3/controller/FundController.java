@@ -20,8 +20,15 @@ public class FundController {
     @GetMapping("/funds/statistics")
     public ResponseEntity<List<AnnualFundStatisticsResponseDto>> showStatistics() {
         List<AnnualFundStatisticsResponseDto> annualFundStatistics =
-                fundService.calculateAnnualSupportAmount();
+                fundService.findAnnualFundStatistics();
 
         return ResponseEntity.ok(annualFundStatistics);
+    }
+
+    @GetMapping("/funds/temp")
+    public ResponseEntity<Void> temp() {
+        fundService.temp();
+
+        return ResponseEntity.ok().build();
     }
 }
