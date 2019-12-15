@@ -2,9 +2,11 @@ package com.parksungbum.kakaopaytask3.controller;
 
 import com.parksungbum.kakaopaytask3.service.FundService;
 import com.parksungbum.kakaopaytask3.service.dto.AnnualFundStatisticsResponseDto;
+import com.parksungbum.kakaopaytask3.service.dto.AverageAmountAndYearResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionMaxFundResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -32,5 +34,11 @@ public class FundController {
                 fundService.findYearAndInstitutionOfMaxFund();
 
         return ResponseEntity.ok(institutionAndYearOfMaxFund);
+    }
+
+    @GetMapping("/funds/average/max-min")
+    public ResponseEntity<AverageAmountAndYearResponseDto>
+    showMaxAverageAndMinAverageFundInfo(@RequestParam(value = "bank") String bankName) {
+        return null;
     }
 }

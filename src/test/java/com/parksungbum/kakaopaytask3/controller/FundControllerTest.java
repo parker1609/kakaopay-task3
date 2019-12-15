@@ -46,4 +46,23 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .jsonPath("$.bank").isEqualTo("주택도시기금")
         ;
     }
+
+    @Test
+    @DisplayName("전체 기간에서 입력한 은행 중 지원 금액 평균이 가장 클 때와 작을 때 연도와 지원 금액을 조회한다.")
+    void show_year_and_amount_of_max_min_average_fund_by_bank() {
+        webTestClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/funds/average/max-min")
+                        .queryParam("bank", "외환은행").build())
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectHeader()
+                .contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$.year").value(hasItem("2017"))
+                .jsonPath("$.amount").value(hasItem("0"))
+                .jsonPath("$.year").value(hasItem("2015"))
+                .jsonPath("$.amount").value(hasItem("1702"))
+        ;
+    }
 }
