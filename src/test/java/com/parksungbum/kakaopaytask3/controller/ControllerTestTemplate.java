@@ -15,7 +15,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
-@AutoConfigureWebTestClient
+@AutoConfigureWebTestClient(timeout = "10000")
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ControllerTestTemplate {
