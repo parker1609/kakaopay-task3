@@ -5,6 +5,7 @@ import com.parksungbum.kakaopaytask3.domain.fund.FundRepository;
 import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.service.dto.AnnualFundStatisticsResponseDto;
+import com.parksungbum.kakaopaytask3.service.dto.AverageAmountAndYearResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionMaxFundResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionTotalAmountDto;
 import com.parksungbum.kakaopaytask3.service.exception.DoesNotMatchYearException;
@@ -80,5 +81,25 @@ public class FundService {
         }
 
         return institutionMaxFundResponses.get(0);
+    }
+
+    public List<AverageAmountAndYearResponseDto> findMaxAndMinAverageAmountInfoByBank(String bankName) {
+        List<Object[]> minAverageAmountInfo = fundRepository.findMinAverageAmountByBank(bankName);
+        List<Object[]> maxAverageAmountInfo = fundRepository.findMaxAverageAmountByBank(bankName);
+        List<AverageAmountAndYearResponseDto> averageAmountAndYearResponses = new ArrayList<>();
+
+        AverageAmountAndYearResponseDto minAverageAmountDto =
+                new AverageAmountAndYearResponseDto(
+                        minAverageAmountInfo.get(0)[0].toString(),
+                        minAverageAmountInfo.get(0)[1].toString());
+        AverageAmountAndYearResponseDto maxAverageAmountDto =
+                new AverageAmountAndYearResponseDto(
+                        maxAverageAmountInfo.get(0)[0].toString(),
+                        maxAverageAmountInfo.get(0)[1].toString());
+
+        averageAmountAndYearResponses.add(minAverageAmountDto);
+        averageAmountAndYearResponses.add(maxAverageAmountDto);
+
+        return averageAmountAndYearResponses;
     }
 }

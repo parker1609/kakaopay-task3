@@ -52,17 +52,17 @@ public class FundControllerTest extends ControllerTestTemplate {
     void show_year_and_amount_of_max_min_average_fund_by_bank() {
         webTestClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/funds/average/max-min")
-                        .queryParam("bank", "외환은행").build())
+                        .queryParam("bank", "국민은행").build())
                 .exchange()
                 .expectStatus()
                 .isOk()
                 .expectHeader()
                 .contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
-                .jsonPath("$.year").value(hasItem("2017"))
-                .jsonPath("$.amount").value(hasItem("0"))
-                .jsonPath("$.year").value(hasItem("2015"))
-                .jsonPath("$.amount").value(hasItem("1702"))
+                .jsonPath("$.[0].year").isEqualTo("2006")
+                .jsonPath("$.[0].amount").isEqualTo("484")
+                .jsonPath("$.[1].year").isEqualTo("2016")
+                .jsonPath("$.[1].amount").isEqualTo("5115")
         ;
     }
 }
