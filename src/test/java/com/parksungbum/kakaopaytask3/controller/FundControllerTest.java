@@ -67,7 +67,8 @@ public class FundControllerTest extends ControllerTestTemplate {
     }
 
     @Test
-    void name() {
+    @DisplayName("2018년 특정 달과 은행을 입력했을 때 예측값을 조회한다.")
+    void show_predict_fund() {
         webTestClient.get()
                 .uri(uriBuilder -> uriBuilder.path("/funds/predict")
                         .queryParam("bank", "국민은행")
@@ -83,6 +84,22 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .jsonPath("$.year").isEqualTo("2018")
                 .jsonPath("$.month").isEqualTo("2")
                 .jsonPath("$.amount").isEqualTo("4817")
+        ;
+    }
+
+    @Test
+    @DisplayName("찾을 수 없는 기관을 쿼리 스트링에 입력한 경우 응답에 에러 메시지가 담긴다.")
+    void show_error_does_not_found_bank() {
+        webTestClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/funds/predict")
+                        .queryParam("bank", "카카오페이")
+                        .queryParam("month", 2)
+                        .build())
+                .exchange()
+                .expectStatus()
+                .is5xxServerError()
+                .expectBody()
+                .jsonPath("$.message").isEqualTo("찾을 수 없는 기관입니다.")
         ;
     }
 }
