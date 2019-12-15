@@ -70,17 +70,11 @@ public class FundService {
 
     public InstitutionMaxFundResponseDto findYearAndInstitutionOfMaxFund() {
         List<Object[]> yearAndInstitutionOfMaxFund = fundRepository.findYearAndInstitutionOfMaxFund();
-        List<InstitutionMaxFundResponseDto> institutionMaxFundResponses = new ArrayList<>();
 
-        for (Object[] institutionInfos : yearAndInstitutionOfMaxFund) {
-            InstitutionMaxFundResponseDto institutionInfo =
-                    new InstitutionMaxFundResponseDto(
-                            institutionInfos[0].toString(),
-                            institutionInfos[1].toString());
-            institutionMaxFundResponses.add(institutionInfo);
-        }
-
-        return institutionMaxFundResponses.get(0);
+        return new InstitutionMaxFundResponseDto(
+                yearAndInstitutionOfMaxFund.get(0)[0].toString(),
+                yearAndInstitutionOfMaxFund.get(0)[1].toString()
+        );
     }
 
     public List<AverageAmountAndYearResponseDto> findMaxAndMinAverageAmountInfoByBank(String bankName) {
