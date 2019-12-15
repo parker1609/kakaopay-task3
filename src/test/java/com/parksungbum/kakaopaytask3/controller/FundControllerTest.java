@@ -65,4 +65,24 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .jsonPath("$.[1].amount").isEqualTo("5115")
         ;
     }
+
+    @Test
+    void name() {
+        webTestClient.get()
+                .uri(uriBuilder -> uriBuilder.path("/funds/predict")
+                        .queryParam("bank", "국민은행")
+                        .queryParam("month", 2)
+                        .build())
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectHeader()
+                .contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$.bank").isEqualTo("bank01")
+                .jsonPath("$.year").isEqualTo("2018")
+                .jsonPath("$.month").isEqualTo("2")
+                .jsonPath("$.amount").isEqualTo("4817")
+        ;
+    }
 }

@@ -4,6 +4,7 @@ import com.parksungbum.kakaopaytask3.service.FundService;
 import com.parksungbum.kakaopaytask3.service.dto.AnnualFundStatisticsResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.AverageAmountAndYearResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionMaxFundResponseDto;
+import com.parksungbum.kakaopaytask3.service.dto.PredictFundDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,5 +43,14 @@ public class FundController {
                 = fundService.findMaxAndMinAverageAmountInfoByBank(bankName);
 
         return ResponseEntity.ok(maxAndMinAverageAmountInfoByBanks);
+    }
+
+    @GetMapping("/funds/predict")
+    public ResponseEntity<PredictFundDto> findPredictValue(
+            @RequestParam(value = "bank") String bankName,
+            @RequestParam(value = "month") int month) {
+        PredictFundDto predictFund = fundService.findPredictFund(bankName, month);
+
+        return ResponseEntity.ok(predictFund);
     }
 }

@@ -58,4 +58,13 @@ public interface FundRepository extends JpaRepository<Fund, Long> {
                     "LIMIT 1",
             nativeQuery = true)
     List<Object[]> findMinAverageAmountByBank(String bankName);
+
+    @Query(value =
+            "SELECT housing_finance.year, housing_finance.month, fund.amount FROM fund\n" +
+                    "INNER JOIN institution ON institution.id = fund.institution_id\n" +
+                    "INNER JOIN housing_finance ON fund.housing_finance_id = housing_finance.id\n" +
+                    "WHERE institution.name = ?1\n" +
+                    "GROUP BY housing_finance.year, housing_finance.month, fund.amount",
+            nativeQuery = true)
+    List<Object[]> findYearAndMonthAndAmountByBank(String bankName);
 }

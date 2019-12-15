@@ -16,6 +16,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation group: 'com.opencsv', name: 'opencsv', version: '4.4'
+    implementation group: 'org.apache.commons', name: 'commons-math3', version: '3.0'
+
 
     runtimeOnly 'com.h2database:h2'
     runtimeOnly 'mysql:mysql-connector-java'

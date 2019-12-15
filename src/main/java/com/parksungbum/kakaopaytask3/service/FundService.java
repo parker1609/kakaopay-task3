@@ -4,11 +4,10 @@ import com.parksungbum.kakaopaytask3.domain.fund.Fund;
 import com.parksungbum.kakaopaytask3.domain.fund.FundRepository;
 import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
-import com.parksungbum.kakaopaytask3.service.dto.AnnualFundStatisticsResponseDto;
-import com.parksungbum.kakaopaytask3.service.dto.AverageAmountAndYearResponseDto;
-import com.parksungbum.kakaopaytask3.service.dto.InstitutionMaxFundResponseDto;
-import com.parksungbum.kakaopaytask3.service.dto.InstitutionTotalAmountDto;
+import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
+import com.parksungbum.kakaopaytask3.service.dto.*;
 import com.parksungbum.kakaopaytask3.service.exception.DoesNotMatchYearException;
+import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +16,7 @@ import java.util.List;
 
 @Service
 public class FundService {
+    public static final int NEXT_YEAR = 2018;
     private final FundRepository fundRepository;
 
     public FundService(final FundRepository fundRepository) {
@@ -98,5 +98,26 @@ public class FundService {
         averageAmountAndYearResponses.add(maxAverageAmountDto);
 
         return averageAmountAndYearResponses;
+    }
+
+    @Transactional(readOnly = true)
+    public PredictFundDto findPredictFund(final String bankName, final int month) {
+        SimpleRegression simpleRegression = new SimpleRegression(true);
+
+        List<Object[]> yearAndMonthAndAmountByBanks = fundRepository.findYearAndMonthAndAmountByBank(bankName);
+        int index = 0;
+        for (Object[] yearAndMonthAndAmountByBank : yearAndMonthAndAmountByBanks) {
+            String amount = yearAndMonthAndAmountByBank[2].toString();
+            simpleRegression.addData(index++, Double.parseDouble(amount));
+        }
+
+        for (int i = 0; i < month - 1; ++i) {
+            simpleRegression.addData(index, simpleRegression.predict(index));
+            index++;
+        }
+
+        int predictAmount = (int) simpleRegression.predict(index);
+        return new PredictFundDto(InstitutionCode.convertInstitutionCode(bankName),
+                NEXT_YEAR, month, predictAmount);
     }
 }
