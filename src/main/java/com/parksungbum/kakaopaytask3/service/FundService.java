@@ -5,6 +5,7 @@ import com.parksungbum.kakaopaytask3.domain.fund.FundRepository;
 import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.service.dto.AnnualFundStatisticsResponseDto;
+import com.parksungbum.kakaopaytask3.service.dto.InstitutionMaxFundResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionTotalAmountDto;
 import com.parksungbum.kakaopaytask3.service.exception.DoesNotMatchYearException;
 import org.springframework.stereotype.Service;
@@ -66,13 +67,18 @@ public class FundService {
         }
     }
 
-    public void temp() {
+    public InstitutionMaxFundResponseDto findInstitutionAndYearOfMaxFund() {
         List<Object[]> yearAndInstitutionOfMaxFund = fundRepository.findYearAndInstitutionOfMaxFund();
-        for (Object[] objects : yearAndInstitutionOfMaxFund) {
-            for (Object object : objects) {
-                System.out.print(object + " ");
-            }
-            System.out.println();
+        List<InstitutionMaxFundResponseDto> institutionMaxFundResponses = new ArrayList<>();
+
+        for (Object[] institutionInfos : yearAndInstitutionOfMaxFund) {
+            InstitutionMaxFundResponseDto institutionInfo =
+                    new InstitutionMaxFundResponseDto(
+                            institutionInfos[0].toString(),
+                            institutionInfos[1].toString());
+            institutionMaxFundResponses.add(institutionInfo);
         }
+
+        return institutionMaxFundResponses.get(0);
     }
 }

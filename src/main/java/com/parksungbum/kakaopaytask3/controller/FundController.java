@@ -2,6 +2,7 @@ package com.parksungbum.kakaopaytask3.controller;
 
 import com.parksungbum.kakaopaytask3.service.FundService;
 import com.parksungbum.kakaopaytask3.service.dto.AnnualFundStatisticsResponseDto;
+import com.parksungbum.kakaopaytask3.service.dto.InstitutionMaxFundResponseDto;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -26,9 +27,10 @@ public class FundController {
     }
 
     @GetMapping("/funds/maximum/institution")
-    public ResponseEntity<Void> showInstitutionAndYearOfMaximumAmount() {
-        fundService.temp();
+    public ResponseEntity<InstitutionMaxFundResponseDto> showInstitutionAndYearOfMaximumFund() {
+        InstitutionMaxFundResponseDto institutionAndYearOfMaxFund =
+                fundService.findInstitutionAndYearOfMaxFund();
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(institutionAndYearOfMaxFund);
     }
 }

@@ -43,7 +43,7 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
                 .jsonPath("$.year").isEqualTo("2014")
-                .jsonPath("$.name").isEqualTo("주택도시기금")
+                .jsonPath("$.bank").isEqualTo("주택도시기금")
         ;
     }
 }
