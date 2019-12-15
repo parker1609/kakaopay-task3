@@ -24,11 +24,11 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .expectHeader()
                 .contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
-                .jsonPath("$..year").value(hasItem("2005"))
-                .jsonPath("$..totalAmount").value(hasItem("48016"))
+                .jsonPath("$..year").value(hasItem(2005))
+                .jsonPath("$..totalAmount").value(hasItem(48016))
                 .jsonPath("$..detailAmount").isArray()
                 .jsonPath("$..detailAmount[*].name").value(hasItem("주택도시기금"))
-                .jsonPath("$..detailAmount[*].amount").value(hasItem("22247"))
+                .jsonPath("$..detailAmount[*].amount").value(hasItem(22247))
         ;
     }
 
@@ -42,7 +42,7 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .expectHeader()
                 .contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
-                .jsonPath("$.year").isEqualTo("2014")
+                .jsonPath("$.year").isEqualTo(2014)
                 .jsonPath("$.bank").isEqualTo("주택도시기금")
         ;
     }
@@ -59,10 +59,10 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .expectHeader()
                 .contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
-                .jsonPath("$.[0].year").isEqualTo("2006")
-                .jsonPath("$.[0].amount").isEqualTo("484")
-                .jsonPath("$.[1].year").isEqualTo("2016")
-                .jsonPath("$.[1].amount").isEqualTo("5115")
+                .jsonPath("$.[0].year").isEqualTo(2006)
+                .jsonPath("$.[0].amount").isEqualTo(484)
+                .jsonPath("$.[1].year").isEqualTo(2016)
+                .jsonPath("$.[1].amount").isEqualTo(5115)
         ;
     }
 
@@ -81,9 +81,9 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
                 .jsonPath("$.bank").isEqualTo("bank01")
-                .jsonPath("$.year").isEqualTo("2018")
-                .jsonPath("$.month").isEqualTo("2")
-                .jsonPath("$.amount").isEqualTo("4817")
+                .jsonPath("$.year").isEqualTo(2018)
+                .jsonPath("$.month").isEqualTo(2)
+                .jsonPath("$.amount").isEqualTo(4817)
         ;
     }
 

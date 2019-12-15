@@ -4,15 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AnnualFundStatisticsResponseDto {
-    private String year;
-    private String totalAmount;
+    private int year;
+    private int totalAmount;
     private List<InstitutionTotalAmountDto> detailAmount = new ArrayList<>();
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public String getTotalAmount() {
+    public int getTotalAmount() {
         return totalAmount;
     }
 
@@ -20,11 +20,11 @@ public class AnnualFundStatisticsResponseDto {
         return detailAmount;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public void setTotalAmount(String totalAmount) {
+    public void setTotalAmount(int totalAmount) {
         this.totalAmount = totalAmount;
     }
 

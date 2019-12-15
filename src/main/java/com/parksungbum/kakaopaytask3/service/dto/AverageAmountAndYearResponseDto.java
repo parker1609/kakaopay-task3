@@ -1,27 +1,27 @@
 package com.parksungbum.kakaopaytask3.service.dto;
 
 public class AverageAmountAndYearResponseDto {
-    private String year;
-    private String amount;
+    private int year;
+    private int amount;
 
-    public AverageAmountAndYearResponseDto(String year, String amount) {
+    public AverageAmountAndYearResponseDto(int year, int amount) {
         this.year = year;
         this.amount = amount;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

@@ -46,8 +46,8 @@ public class FundService {
 
         for (Object[] annualTotalFund : annualTotalFunds) {
             AnnualFundStatisticsResponseDto annualFundStatisticsResponseDto = new AnnualFundStatisticsResponseDto();
-            annualFundStatisticsResponseDto.setYear(annualTotalFund[0].toString());
-            annualFundStatisticsResponseDto.setTotalAmount(annualTotalFund[1].toString());
+            annualFundStatisticsResponseDto.setYear(Integer.parseInt(annualTotalFund[0].toString()));
+            annualFundStatisticsResponseDto.setTotalAmount(Integer.parseInt(annualTotalFund[1].toString()));
             annualFundStatistics.add(annualFundStatisticsResponseDto);
         }
 
@@ -59,12 +59,13 @@ public class FundService {
         for (Object[] institutionFund : annualInstitutionFunds) {
             AnnualFundStatisticsResponseDto currentYearSupportAmount =
                     annualFundStatistics.stream()
-                            .filter(dto -> dto.getYear().equals(institutionFund[0].toString()))
+                            .filter(dto -> dto.getYear() == Integer.parseInt(institutionFund[0].toString()))
                             .findAny()
                             .orElseThrow(DoesNotMatchYearException::new);
 
             InstitutionTotalAmountDto institutionTotalAmountDto =
-                    new InstitutionTotalAmountDto(institutionFund[1].toString(), institutionFund[2].toString());
+                    new InstitutionTotalAmountDto(institutionFund[1].toString(),
+                            Integer.parseInt(institutionFund[2].toString()));
             currentYearSupportAmount.getDetailAmount().add(institutionTotalAmountDto);
         }
     }
@@ -74,7 +75,7 @@ public class FundService {
         List<Object[]> yearAndInstitutionOfMaxFund = fundRepository.findYearAndInstitutionOfMaxFund();
 
         return new InstitutionMaxFundResponseDto(
-                yearAndInstitutionOfMaxFund.get(0)[0].toString(),
+                Integer.parseInt(yearAndInstitutionOfMaxFund.get(0)[0].toString()),
                 yearAndInstitutionOfMaxFund.get(0)[1].toString()
         );
     }
@@ -87,12 +88,12 @@ public class FundService {
 
         AverageAmountAndYearResponseDto minAverageAmountDto =
                 new AverageAmountAndYearResponseDto(
-                        minAverageAmountInfo.get(0)[0].toString(),
-                        minAverageAmountInfo.get(0)[1].toString());
+                        Integer.parseInt(minAverageAmountInfo.get(0)[0].toString()),
+                        Integer.parseInt(minAverageAmountInfo.get(0)[1].toString()));
         AverageAmountAndYearResponseDto maxAverageAmountDto =
                 new AverageAmountAndYearResponseDto(
-                        maxAverageAmountInfo.get(0)[0].toString(),
-                        maxAverageAmountInfo.get(0)[1].toString());
+                        Integer.parseInt(maxAverageAmountInfo.get(0)[0].toString()),
+                        Integer.parseInt(maxAverageAmountInfo.get(0)[1].toString()));
 
         averageAmountAndYearResponses.add(minAverageAmountDto);
         averageAmountAndYearResponses.add(maxAverageAmountDto);

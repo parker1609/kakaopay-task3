@@ -2,9 +2,9 @@ package com.parksungbum.kakaopaytask3.service.dto;
 
 public class InstitutionTotalAmountDto {
     private String name;
-    private String amount;
+    private int amount;
 
-    public InstitutionTotalAmountDto(String name, String amount) {
+    public InstitutionTotalAmountDto(String name, int amount) {
         this.name = name;
         this.amount = amount;
     }
@@ -13,7 +13,7 @@ public class InstitutionTotalAmountDto {
         return name;
     }
 
-    public String getAmount() {
+    public int getAmount() {
         return amount;
     }
 
@@ -21,7 +21,7 @@ public class InstitutionTotalAmountDto {
         this.name = name;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 }

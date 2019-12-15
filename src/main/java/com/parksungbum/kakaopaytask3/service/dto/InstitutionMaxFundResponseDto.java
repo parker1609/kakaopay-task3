@@ -1,15 +1,15 @@
 package com.parksungbum.kakaopaytask3.service.dto;
 
 public class InstitutionMaxFundResponseDto {
-    private String year;
+    private int year;
     private String bank;
 
-    public InstitutionMaxFundResponseDto(String year, String bank) {
+    public InstitutionMaxFundResponseDto(int year, String bank) {
         this.year = year;
         this.bank = bank;
     }
 
-    public String getYear() {
+    public int getYear() {
         return year;
     }
 
@@ -17,7 +17,7 @@ public class InstitutionMaxFundResponseDto {
         return bank;
     }
 
-    public void setYear(String year) {
+    public void setYear(int year) {
         this.year = year;
     }
 
