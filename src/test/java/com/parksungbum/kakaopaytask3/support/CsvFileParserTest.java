@@ -1,6 +1,6 @@
 package com.parksungbum.kakaopaytask3.support;
 
-import com.parksungbum.kakaopaytask3.support.parser.CsvFileParser;
+import com.parksungbum.kakaopaytask3.support.util.CsvFileParser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package com.parksungbum.kakaopaytask3.support.parser;
+package com.parksungbum.kakaopaytask3.support.util;
 
 import com.opencsv.CSVReader;
 

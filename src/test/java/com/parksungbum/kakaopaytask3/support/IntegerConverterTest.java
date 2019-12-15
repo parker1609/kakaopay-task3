@@ -1,6 +1,6 @@
 package com.parksungbum.kakaopaytask3.support;
 
-import com.parksungbum.kakaopaytask3.support.parser.IntegerConverter;
+import com.parksungbum.kakaopaytask3.support.util.IntegerConverter;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

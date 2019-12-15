@@ -1,7 +1,7 @@
 package com.parksungbum.kakaopaytask3.support.config;
 
-import com.parksungbum.kakaopaytask3.support.parser.CsvFileParser;
-import com.parksungbum.kakaopaytask3.support.parser.IntegerConverter;
+import com.parksungbum.kakaopaytask3.support.util.CsvFileParser;
+import com.parksungbum.kakaopaytask3.support.util.IntegerConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
