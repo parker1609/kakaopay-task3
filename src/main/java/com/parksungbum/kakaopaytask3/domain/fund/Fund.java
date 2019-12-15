@@ -18,7 +18,7 @@ public class Fund extends BaseEntity {
 
     private int amount;
 
-    public Fund(HousingFinance housingFinance, Institution institution, int amount) {
+    public Fund(final HousingFinance housingFinance, final Institution institution, final int amount) {
         this.housingFinance = housingFinance;
         this.institution = institution;
         this.amount = amount;

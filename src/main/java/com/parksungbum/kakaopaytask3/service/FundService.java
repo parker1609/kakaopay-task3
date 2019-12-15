@@ -19,7 +19,7 @@ import java.util.List;
 public class FundService {
     private final FundRepository fundRepository;
 
-    public FundService(FundRepository fundRepository) {
+    public FundService(final FundRepository fundRepository) {
         this.fundRepository = fundRepository;
     }
 
@@ -41,7 +41,7 @@ public class FundService {
         return annualFundStatistics;
     }
 
-    private List<AnnualFundStatisticsResponseDto> assembleAnnualTotalFunds(List<Object[]> annualTotalFunds) {
+    private List<AnnualFundStatisticsResponseDto> assembleAnnualTotalFunds(final List<Object[]> annualTotalFunds) {
         List<AnnualFundStatisticsResponseDto> annualFundStatistics = new ArrayList<>();
 
         for (Object[] annualTotalFund : annualTotalFunds) {
@@ -54,8 +54,8 @@ public class FundService {
         return annualFundStatistics;
     }
 
-    private void assembleAnnualInstitutionFunds(List<AnnualFundStatisticsResponseDto> annualFundStatistics,
-                                                List<Object[]> annualInstitutionFunds) {
+    private void assembleAnnualInstitutionFunds(final List<AnnualFundStatisticsResponseDto> annualFundStatistics,
+                                                final List<Object[]> annualInstitutionFunds) {
         for (Object[] institutionFund : annualInstitutionFunds) {
             AnnualFundStatisticsResponseDto currentYearSupportAmount =
                     annualFundStatistics.stream()
@@ -80,7 +80,7 @@ public class FundService {
     }
 
     @Transactional(readOnly = true)
-    public List<AverageAmountAndYearResponseDto> findMaxAndMinAverageAmountInfoByBank(String bankName) {
+    public List<AverageAmountAndYearResponseDto> findMaxAndMinAverageAmountInfoByBank(final String bankName) {
         List<Object[]> minAverageAmountInfo = fundRepository.findMinAverageAmountByBank(bankName);
         List<Object[]> maxAverageAmountInfo = fundRepository.findMaxAverageAmountByBank(bankName);
         List<AverageAmountAndYearResponseDto> averageAmountAndYearResponses = new ArrayList<>();

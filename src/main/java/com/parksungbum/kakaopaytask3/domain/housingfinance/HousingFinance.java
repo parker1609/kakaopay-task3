@@ -14,7 +14,7 @@ public class HousingFinance extends BaseEntity {
     @Embedded
     private Month month;
 
-    public HousingFinance(Year year, Month month) {
+    public HousingFinance(final Year year, final Month month) {
         this.year = year;
         this.month = month;
     }

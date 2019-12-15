@@ -12,7 +12,7 @@ public class CsvFileParser {
     private static final String SPACES_REGEX = "^[\\s]*$";
     private static final Pattern spacePattern = Pattern.compile(SPACES_REGEX);
 
-    public List<String> parseHeader(List<String[]> csvFileData) {
+    public List<String> parseHeader(final List<String[]> csvFileData) {
         String[] header = csvFileData.get(HEADER_START_INDEX);
         int startIndexWithoutSpace = getNumberOfSpaceInPrefix(header);
         int endIndexWithoutSpace = header.length - getNumberOfSpaceInSuffix(header);
@@ -21,7 +21,7 @@ public class CsvFileParser {
                 .subList(startIndexWithoutSpace, endIndexWithoutSpace));
     }
 
-    private int getNumberOfSpaceInPrefix(String[] rows) {
+    private int getNumberOfSpaceInPrefix(final String[] rows) {
         int numberOfSpaceInPrefix = 0;
 
         for (String row : rows) {
@@ -36,7 +36,7 @@ public class CsvFileParser {
         return numberOfSpaceInPrefix;
     }
 
-    private int getNumberOfSpaceInSuffix(String[] rows) {
+    private int getNumberOfSpaceInSuffix(final String[] rows) {
         int numberOfSpaceInSuffix = 0;
 
         for (int index = rows.length - 1; index >= 0; --index) {
@@ -52,7 +52,7 @@ public class CsvFileParser {
         return numberOfSpaceInSuffix;
     }
 
-    public List<List<String>> parseBody(List<String[]> csvFileData) {
+    public List<List<String>> parseBody(final List<String[]> csvFileData) {
         List<List<String>> body = new ArrayList<>(new ArrayList<>());
 
         for (String[] row : csvFileData.subList(BODY_START_INDEX, csvFileData.size())) {

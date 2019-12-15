@@ -15,7 +15,7 @@ import java.util.List;
 public class FundController {
     private final FundService fundService;
 
-    public FundController(FundService fundService) {
+    public FundController(final FundService fundService) {
         this.fundService = fundService;
     }
 

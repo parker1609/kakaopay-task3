@@ -12,7 +12,7 @@ import java.util.List;
 public class InstitutionController {
     private final InstitutionService institutionService;
 
-    public InstitutionController(InstitutionService institutionService) {
+    public InstitutionController(final InstitutionService institutionService) {
         this.institutionService = institutionService;
     }
 

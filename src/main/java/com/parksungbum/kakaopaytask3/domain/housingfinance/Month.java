@@ -13,7 +13,7 @@ public class Month {
     @Column(nullable = false, length = 10)
     private int month;
 
-    public Month(int month) {
+    public Month(final int month) {
         validate(month);
         this.month = month;
     }
@@ -21,7 +21,7 @@ public class Month {
     private Month() {
     }
 
-    private void validate(int month) {
+    private void validate(final int month) {
         if (MIN_MONTH > month || MAX_MONTH < month) {
             throw new InvalidMonthException();
         }

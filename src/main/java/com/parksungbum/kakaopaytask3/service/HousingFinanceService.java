@@ -11,12 +11,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class HousingFinanceService {
     private final HousingFinanceRepository housingFinanceRepository;
 
-    public HousingFinanceService(HousingFinanceRepository housingFinanceRepository) {
+    public HousingFinanceService(final HousingFinanceRepository housingFinanceRepository) {
         this.housingFinanceRepository = housingFinanceRepository;
     }
 
     @Transactional()
-    public HousingFinance save(int year, int month) {
+    public HousingFinance save(final int year, final int month) {
         HousingFinance housingFinance = new HousingFinance(new Year(year), new Month(month));
         return housingFinanceRepository.save(housingFinance);
     }

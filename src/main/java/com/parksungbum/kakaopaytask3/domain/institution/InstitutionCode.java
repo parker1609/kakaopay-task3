@@ -18,7 +18,7 @@ public enum InstitutionCode {
     private final String name;
     private final String code;
 
-    InstitutionCode(String name, String code) {
+    InstitutionCode(final String name, final String code) {
         this.name = name;
         this.code = code;
     }
@@ -31,7 +31,7 @@ public enum InstitutionCode {
         return code;
     }
 
-    public static String convertInstitutionName(String name) {
+    public static String convertInstitutionName(final String name) {
         return Stream.of(values())
                 .filter(code -> code.containsName(name))
                 .findAny()
@@ -40,7 +40,7 @@ public enum InstitutionCode {
                 ;
     }
 
-    public static String convertInstitutionCode(String name) {
+    public static String convertInstitutionCode(final String name) {
         return Stream.of(values())
                 .filter(code -> code.containsName(name))
                 .findAny()
@@ -49,7 +49,7 @@ public enum InstitutionCode {
                 ;
     }
 
-    public boolean containsName(String name) {
+    public boolean containsName(final String name) {
         return name.contains(this.name);
     }
 }

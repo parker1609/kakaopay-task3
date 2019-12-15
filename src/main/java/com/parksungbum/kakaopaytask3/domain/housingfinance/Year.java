@@ -13,7 +13,7 @@ public class Year {
     @Column(nullable = false, length = 10)
     private int year;
 
-    public Year(int year) {
+    public Year(final int year) {
         validate(year);
         this.year = year;
     }
@@ -21,7 +21,7 @@ public class Year {
     private Year() {
     }
 
-    private void validate(int year) {
+    private void validate(final int year) {
         if (MIN_YEAR > year || MAX_YEAR < year) {
             throw new InvalidYearException();
         }

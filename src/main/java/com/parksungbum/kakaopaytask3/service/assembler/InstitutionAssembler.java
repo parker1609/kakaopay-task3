@@ -5,7 +5,7 @@ import com.parksungbum.kakaopaytask3.service.dto.InstitutionResponseDto;
 
 public class InstitutionAssembler {
 
-    public static InstitutionResponseDto toResponseDto(Institution institution) {
+    public static InstitutionResponseDto toResponseDto(final Institution institution) {
         return new InstitutionResponseDto(institution.getName(), institution.getCode());
     }
 }

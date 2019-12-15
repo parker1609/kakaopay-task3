@@ -15,18 +15,18 @@ import java.util.stream.Collectors;
 public class InstitutionService {
     private final InstitutionRepository institutionRepository;
 
-    public InstitutionService(InstitutionRepository institutionRepository) {
+    public InstitutionService(final InstitutionRepository institutionRepository) {
         this.institutionRepository = institutionRepository;
     }
 
     @Transactional()
-    public Institution save(String institutionName, String institutionCode) {
+    public Institution save(final String institutionName, final String institutionCode) {
         Institution institution = new Institution(institutionName, institutionCode);
         return institutionRepository.save(institution);
     }
 
     @Transactional(readOnly = true)
-    public Institution findById(Long institutionId) {
+    public Institution findById(final Long institutionId) {
         return institutionRepository.findById(institutionId)
                 .orElseThrow(NotFoundInstitutionException::new);
     }

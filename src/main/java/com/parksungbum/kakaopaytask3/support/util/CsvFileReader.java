@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CsvFileReader {
 
-    public List<String[]> read(InputStream stream) throws IOException {
+    public List<String[]> read(final InputStream stream) throws IOException {
         List<String[]> results = new ArrayList<>();
 
         try (CSVReader reader = new CSVReader(new InputStreamReader(stream))) {

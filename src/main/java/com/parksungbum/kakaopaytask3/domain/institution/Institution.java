@@ -14,7 +14,7 @@ public class Institution extends BaseEntity {
     @Column(nullable = false, length = 10)
     private String code;
 
-    public Institution(String name, String code) {
+    public Institution(final String name, final String code) {
         this.name = name;
         this.code = code;
     }
