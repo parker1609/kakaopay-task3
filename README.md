@@ -22,8 +22,18 @@
     - Junit5
 
 
-## 실행하기
+## 빌드 및 실행하기
+### 터미널 환경
+- Git, Java 는 설치되어 있다고 가정한다.
 
+```
+$ git clone https://github.com/CODEMCD/kakaopay-task3.git
+$ cd kakaopay-task3
+$ ./gradlew clean build
+$ java -jar build/libs/kakaopay-task3-0.0.1-SNAPSHOT.jar
+```
+
+- 접속 Base URI: `http://localhost:8080`
 
 ## 기능 요구사항
 ### 필수사항
@@ -295,7 +305,7 @@ GET /funds/years/statistics HTTP/1.1
                 "amount": 704
             }
         ]
-    }
+    },
 
     ...
 ]
@@ -717,7 +727,7 @@ GET /funds/years/statistics HTTP/1.1
                 "amount": 704
             }
         ]
-    }
+    },
 
     ...
 ]
