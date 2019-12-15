@@ -17,7 +17,6 @@ import static org.mockito.Mockito.verify;
 
 @ExtendWith(SpringExtension.class)
 public class FundServiceTest {
-
     private static final int AMOUNT = 3000;
 
     @InjectMocks

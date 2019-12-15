@@ -15,7 +15,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CsvFileParserTest {
-
     private CsvFileParser csvFileParser = new CsvFileParser();
     private List<String[]> csvFileRows = new ArrayList<>();
 

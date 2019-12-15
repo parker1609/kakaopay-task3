@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class InstitutionService {
-
     private final InstitutionRepository institutionRepository;
 
     public InstitutionService(InstitutionRepository institutionRepository) {

@@ -16,7 +16,6 @@ import java.util.List;
 
 @Service
 public class FundService {
-
     private final FundRepository fundRepository;
 
     public FundService(FundRepository fundRepository) {

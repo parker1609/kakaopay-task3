@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class HousingFinanceService {
-
     private final HousingFinanceRepository housingFinanceRepository;
 
     public HousingFinanceService(HousingFinanceRepository housingFinanceRepository) {

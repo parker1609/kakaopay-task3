@@ -10,7 +10,6 @@ import java.util.List;
 
 @RestController
 public class InstitutionController {
-
     private final InstitutionService institutionService;
 
     public InstitutionController(InstitutionService institutionService) {
