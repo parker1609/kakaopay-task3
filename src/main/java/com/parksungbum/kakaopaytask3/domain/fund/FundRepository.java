@@ -12,7 +12,7 @@ public interface FundRepository extends JpaRepository<Fund, Long> {
                     "INNER JOIN housing_finance ON fund.housing_finance_id = housing_finance.id\n" +
                     "GROUP BY housing_finance.year",
             nativeQuery = true)
-    List<Object[]> findAnnualTotalFund();
+    List<Object[]> findAllAnnualTotalFund();
 
     @Query(value =
             "SELECT housing_finance.year, institution.name, SUM(fund.amount) AS detail_amount FROM fund\n" +
@@ -21,7 +21,7 @@ public interface FundRepository extends JpaRepository<Fund, Long> {
                     "GROUP BY institution.name, housing_finance.year\n" +
                     "ORDER BY housing_finance.year",
             nativeQuery = true)
-    List<Object[]> findAnnualInstitutionFund();
+    List<Object[]> findAllAnnualInstitutionFund();
 
     @Query(value =
             "SELECT detail_total_amount_table.year, detail_total_amount_table.name FROM (\n" +

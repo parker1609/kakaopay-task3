@@ -6,6 +6,7 @@ import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.service.dto.AnnualFundStatisticsResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionTotalAmountDto;
+import com.parksungbum.kakaopaytask3.service.exception.DoesNotMatchYearException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -26,12 +27,12 @@ public class FundService {
         return fundRepository.save(fund);
     }
 
-    public List<AnnualFundStatisticsResponseDto> findAnnualFundStatistics() {
-        List<Object[]> annualTotalFunds = fundRepository.findAnnualTotalFund();
+    public List<AnnualFundStatisticsResponseDto> findAllAnnualFundStatistics() {
+        List<Object[]> annualTotalFunds = fundRepository.findAllAnnualTotalFund();
         List<AnnualFundStatisticsResponseDto> annualFundStatistics =
                 assembleAnnualTotalFunds(annualTotalFunds);
 
-        List<Object[]> annualInstitutionFunds = fundRepository.findAnnualInstitutionFund();
+        List<Object[]> annualInstitutionFunds = fundRepository.findAllAnnualInstitutionFund();
         assembleAnnualInstitutionFunds(annualFundStatistics, annualInstitutionFunds);
 
         return annualFundStatistics;
@@ -57,7 +58,7 @@ public class FundService {
                     annualFundStatistics.stream()
                             .filter(dto -> dto.getYear().equals(institutionFund[0].toString()))
                             .findAny()
-                            .orElseThrow(IllegalArgumentException::new);
+                            .orElseThrow(DoesNotMatchYearException::new);
 
             InstitutionTotalAmountDto institutionTotalAmountDto =
                     new InstitutionTotalAmountDto(institutionFund[1].toString(), institutionFund[2].toString());

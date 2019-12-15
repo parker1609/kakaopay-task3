@@ -44,4 +44,19 @@ public class FundServiceTest {
 
         verify(fundRepository).save(any(Fund.class));
     }
+
+    @Test
+    @DisplayName("년도별 지원 금액 통계를 정상적으로 조회한다.")
+    void find_annual_fund_statistics() {
+        fundService.findAllAnnualFundStatistics();
+
+        verify(fundRepository).findAllAnnualTotalFund();
+        verify(fundRepository).findAllAnnualInstitutionFund();
+    }
+
+    @Test
+    @DisplayName("두 쿼리 결과를 DTO로 합치는 도중 일치하는 년도가 없을 때 예외가 발생한다.")
+    void find_annaul_fund_statistics_error_does_not_match_year() {
+        // TODO: 2019/12/15 예외 테스트할 수 있는지 생각해볼 것
+    }
 }
