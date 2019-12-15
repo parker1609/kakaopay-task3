@@ -30,7 +30,7 @@ public class ControllerTestTemplate {
         builder.part("file", classPathResource).header("Content-type", "text/csv");
 
         return webTestClient.post()
-                .uri("/upload")
+                .uri("/file/upload")
                 .contentType(MediaType.MULTIPART_FORM_DATA)
                 .body(BodyInserters.fromMultipartData(builder.build()))
                 .exchange()

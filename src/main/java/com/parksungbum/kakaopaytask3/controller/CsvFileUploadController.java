@@ -16,7 +16,7 @@ public class CsvFileUploadController {
         this.csvFileUploadService = csvFileUploadService;
     }
 
-    @PostMapping("/upload")
+    @PostMapping("/file/upload")
     public ResponseEntity<FileUploadResponseDto> upload(@RequestParam("file") MultipartFile multipartFile) {
         FileUploadResponseDto fileUploadResponseDto = csvFileUploadService.save(multipartFile);
         return ResponseEntity.ok(fileUploadResponseDto);

@@ -17,7 +17,7 @@ public class FundControllerTest extends ControllerTestTemplate {
     @Test
     @DisplayName("년도별 각 기관의 지원금 합계와 총 합계를 조회한다.")
     void show_annual_fund_statistics() {
-        webTestClient.get().uri("/funds/statistics")
+        webTestClient.get().uri("/funds/statistics/years")
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -35,7 +35,7 @@ public class FundControllerTest extends ControllerTestTemplate {
     @Test
     @DisplayName("각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명을 조회한다.")
     void show_institution_and_year_of_max_fund() {
-        webTestClient.get().uri("/funds/maximum/institution")
+        webTestClient.get().uri("/funds/maximum/years")
                 .exchange()
                 .expectStatus()
                 .isOk()
@@ -51,7 +51,7 @@ public class FundControllerTest extends ControllerTestTemplate {
     @DisplayName("전체 기간에서 입력한 은행 중 지원 금액 평균이 가장 클 때와 작을 때 연도와 지원 금액을 조회한다.")
     void show_year_and_amount_of_max_min_average_fund_by_bank() {
         webTestClient.get()
-                .uri(uriBuilder -> uriBuilder.path("/funds/average/max-min")
+                .uri(uriBuilder -> uriBuilder.path("/funds/average/maximum-minimum/years")
                         .queryParam("bank", "국민은행").build())
                 .exchange()
                 .expectStatus()

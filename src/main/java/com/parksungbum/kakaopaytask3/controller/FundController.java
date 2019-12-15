@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController("/funds")
+@RestController()
 public class FundController {
     private final FundService fundService;
 
@@ -19,7 +19,7 @@ public class FundController {
         this.fundService = fundService;
     }
 
-    @GetMapping("/statistics")
+    @GetMapping("/funds/statistics/years")
     public ResponseEntity<List<AnnualFundStatisticsResponseDto>> showStatistics() {
         List<AnnualFundStatisticsResponseDto> annualFundStatistics
                 = fundService.findAllAnnualFundStatistics();
@@ -27,7 +27,7 @@ public class FundController {
         return ResponseEntity.ok(annualFundStatistics);
     }
 
-    @GetMapping("/maximum/institution")
+    @GetMapping("/funds/maximum/years")
     public ResponseEntity<InstitutionMaxFundResponseDto> showInstitutionAndYearOfMaximumFund() {
         InstitutionMaxFundResponseDto institutionAndYearOfMaxFund
                 = fundService.findYearAndInstitutionOfMaxFund();
@@ -35,7 +35,7 @@ public class FundController {
         return ResponseEntity.ok(institutionAndYearOfMaxFund);
     }
 
-    @GetMapping("/average/max-min")
+    @GetMapping("/funds/average/maximum-minimum/years")
     public ResponseEntity<List<AverageAmountAndYearResponseDto>>
     showMaxAverageAndMinAverageFundInfo(@RequestParam(value = "bank") String bankName) {
         List<AverageAmountAndYearResponseDto> maxAndMinAverageAmountInfoByBanks
