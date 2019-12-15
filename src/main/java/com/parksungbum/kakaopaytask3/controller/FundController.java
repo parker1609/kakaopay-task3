@@ -20,7 +20,7 @@ public class FundController {
         this.fundService = fundService;
     }
 
-    @GetMapping("/funds/statistics/years")
+    @GetMapping("/funds/years/statistics")
     public ResponseEntity<List<AnnualFundStatisticsResponseDto>> showStatistics() {
         List<AnnualFundStatisticsResponseDto> annualFundStatistics
                 = fundService.findAllAnnualFundStatistics();
@@ -28,7 +28,7 @@ public class FundController {
         return ResponseEntity.ok(annualFundStatistics);
     }
 
-    @GetMapping("/funds/maximum/years")
+    @GetMapping("/funds/years/maximum")
     public ResponseEntity<InstitutionMaxFundResponseDto> showInstitutionAndYearOfMaximumFund() {
         InstitutionMaxFundResponseDto institutionAndYearOfMaxFund
                 = fundService.findYearAndInstitutionOfMaxFund();
@@ -36,7 +36,7 @@ public class FundController {
         return ResponseEntity.ok(institutionAndYearOfMaxFund);
     }
 
-    @GetMapping("/funds/average/maximum-minimum/years")
+    @GetMapping("/funds/years/average/maximum-minimum")
     public ResponseEntity<List<AverageAmountAndYearResponseDto>>
     showMaxAverageAndMinAverageFundInfo(@RequestParam(value = "bank") String bankName) {
         List<AverageAmountAndYearResponseDto> maxAndMinAverageAmountInfoByBanks
