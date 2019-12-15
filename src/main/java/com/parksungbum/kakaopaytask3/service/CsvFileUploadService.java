@@ -4,6 +4,7 @@ import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
 import com.parksungbum.kakaopaytask3.service.dto.FileUploadResponseDto;
+import com.parksungbum.kakaopaytask3.service.exception.CsvFileReadException;
 import com.parksungbum.kakaopaytask3.support.util.CsvFileParser;
 import com.parksungbum.kakaopaytask3.support.util.CsvFileReader;
 import com.parksungbum.kakaopaytask3.support.util.IntegerConverter;
@@ -62,7 +63,7 @@ public class CsvFileUploadService {
             return csvFileReader.read(file.getInputStream());
         } catch (IOException e) {
             log.error("CSV file read error : ", e);
-            throw new IllegalArgumentException();
+            throw new CsvFileReadException(e);
         }
     }
 
@@ -85,7 +86,6 @@ public class CsvFileUploadService {
 
     private void createFundWithLine(List<String> bodyRow, HousingFinance housingFinance) {
         for (int i = START_INSTITUTION_INDEX; i < bodyRow.size(); i++) {
-            // TODO: 2019/12/14 Institution Id 가져오는 것 좀 더 객체지향적으로 생각해볼 것
             Long institutionId = (long) (i - 1);
             Institution institution = institutionService.findById(institutionId);
             int amount = integerConverter.convert(bodyRow.get(i));
