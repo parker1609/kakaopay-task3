@@ -25,8 +25,8 @@ public class FundController {
         return ResponseEntity.ok(annualFundStatistics);
     }
 
-    @GetMapping("/funds/temp")
-    public ResponseEntity<Void> temp() {
+    @GetMapping("/funds/maximum/institution")
+    public ResponseEntity<Void> showInstitutionAndYearOfMaximumAmount() {
         fundService.temp();
 
         return ResponseEntity.ok().build();

@@ -16,7 +16,7 @@ public class FundControllerTest extends ControllerTestTemplate {
 
     @Test
     @DisplayName("년도별 각 기관의 지원금 합계와 총 합계를 조회한다.")
-    void show_amount_sum() {
+    void show_annual_fund_statistics() {
         webTestClient.get().uri("/funds/statistics")
                 .exchange()
                 .expectStatus()
@@ -29,6 +29,21 @@ public class FundControllerTest extends ControllerTestTemplate {
                 .jsonPath("$..detailAmount").isArray()
                 .jsonPath("$..detailAmount[*].name").value(hasItem("주택도시기금"))
                 .jsonPath("$..detailAmount[*].amount").value(hasItem("22247"))
+        ;
+    }
+
+    @Test
+    @DisplayName("각 년도별 각 기관의 전체 지원금액 중에서 가장 큰 금액의 기관명을 조회한다.")
+    void show_institution_and_year_of_max_fund() {
+        webTestClient.get().uri("/funds/maximum/institution")
+                .exchange()
+                .expectStatus()
+                .isOk()
+                .expectHeader()
+                .contentType(MediaType.APPLICATION_JSON)
+                .expectBody()
+                .jsonPath("$.year").isEqualTo("2014")
+                .jsonPath("$.name").isEqualTo("주택도시기금")
         ;
     }
 }
