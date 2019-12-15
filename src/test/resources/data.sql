@@ -1,1 +1,0 @@
-INSERT INTO institution(id, name, code) VALUES(1, '국민은행', 'bank01');

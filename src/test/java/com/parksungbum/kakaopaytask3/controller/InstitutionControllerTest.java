@@ -1,24 +1,18 @@
 package com.parksungbum.kakaopaytask3.controller;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.reactive.server.WebTestClient;
 
-@ActiveProfiles("test")
-@ExtendWith(SpringExtension.class)
-@AutoConfigureWebTestClient
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class InstitutionControllerTest {
+import static org.hamcrest.Matchers.hasItem;
 
-    @Autowired
-    private WebTestClient webTestClient;
+public class InstitutionControllerTest extends ControllerTestTemplate {
+
+    @BeforeEach
+    void setUp() {
+        requestCsvFileUpload(CSV_FILE_NAME);
+    }
 
     @Test
     @DisplayName("기관 조회 요청을 통해 전체 기관의 이름과 코드를 조회한다.")
@@ -30,8 +24,8 @@ public class InstitutionControllerTest {
                 .expectHeader()
                 .contentType(MediaType.APPLICATION_JSON)
                 .expectBody()
-                .jsonPath("$..name").isEqualTo("국민은행")
-                .jsonPath("$..code").isEqualTo("bank01")
+                .jsonPath("$..name").value(hasItem("국민은행"))
+                .jsonPath("$..code").value(hasItem("bank01"))
                 ;
     }
 }
