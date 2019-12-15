@@ -10,6 +10,7 @@ import com.parksungbum.kakaopaytask3.service.dto.InstitutionMaxFundResponseDto;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionTotalAmountDto;
 import com.parksungbum.kakaopaytask3.service.exception.DoesNotMatchYearException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ public class FundService {
         return fundRepository.save(fund);
     }
 
+    @Transactional(readOnly = true)
     public List<AnnualFundStatisticsResponseDto> findAllAnnualFundStatistics() {
         List<Object[]> annualTotalFunds = fundRepository.findAllAnnualTotalFund();
         List<AnnualFundStatisticsResponseDto> annualFundStatistics =
@@ -67,6 +69,7 @@ public class FundService {
         }
     }
 
+    @Transactional(readOnly = true)
     public InstitutionMaxFundResponseDto findYearAndInstitutionOfMaxFund() {
         List<Object[]> yearAndInstitutionOfMaxFund = fundRepository.findYearAndInstitutionOfMaxFund();
 
@@ -76,6 +79,7 @@ public class FundService {
         );
     }
 
+    @Transactional(readOnly = true)
     public List<AverageAmountAndYearResponseDto> findMaxAndMinAverageAmountInfoByBank(String bankName) {
         List<Object[]> minAverageAmountInfo = fundRepository.findMinAverageAmountByBank(bankName);
         List<Object[]> maxAverageAmountInfo = fundRepository.findMaxAverageAmountByBank(bankName);

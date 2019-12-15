@@ -11,6 +11,7 @@ import com.parksungbum.kakaopaytask3.support.util.IntegerConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -44,6 +45,7 @@ public class CsvFileUploadService {
         this.integerConverter = integerConverter;
     }
 
+    @Transactional
     public FileUploadResponseDto save(MultipartFile csvFile) {
         List<String[]> csvFileRows = getCsvFileData(csvFile);
         List<String> header = csvFileParser.parseHeader(csvFileRows);

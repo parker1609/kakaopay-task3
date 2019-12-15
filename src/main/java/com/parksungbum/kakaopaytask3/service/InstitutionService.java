@@ -6,6 +6,7 @@ import com.parksungbum.kakaopaytask3.domain.institution.InstitutionRepository;
 import com.parksungbum.kakaopaytask3.service.assembler.InstitutionAssembler;
 import com.parksungbum.kakaopaytask3.service.dto.InstitutionResponseDto;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,16 +19,19 @@ public class InstitutionService {
         this.institutionRepository = institutionRepository;
     }
 
+    @Transactional()
     public Institution save(String institutionName, String institutionCode) {
         Institution institution = new Institution(institutionName, institutionCode);
         return institutionRepository.save(institution);
     }
 
+    @Transactional(readOnly = true)
     public Institution findById(Long institutionId) {
         return institutionRepository.findById(institutionId)
                 .orElseThrow(NotFoundInstitutionException::new);
     }
 
+    @Transactional(readOnly = true)
     public List<InstitutionResponseDto> findAll() {
         return institutionRepository.findAll().stream()
                 .map(InstitutionAssembler::toResponseDto)
