@@ -24,7 +24,7 @@ public class Fund extends BaseEntity {
         this.amount = amount;
     }
 
-    private Fund() {
+    public Fund() {
     }
 
     public HousingFinanceTime getHousingFinanceTime() {

@@ -19,7 +19,7 @@ public class HousingFinanceTime extends BaseEntity {
         this.month = month;
     }
 
-    private HousingFinanceTime() {
+    public HousingFinanceTime() {
     }
 
     public Year getYear() {

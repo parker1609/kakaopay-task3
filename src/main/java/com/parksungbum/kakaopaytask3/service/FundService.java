@@ -3,10 +3,10 @@ package com.parksungbum.kakaopaytask3.service;
 import com.parksungbum.kakaopaytask3.domain.fund.Fund;
 import com.parksungbum.kakaopaytask3.domain.fund.FundRepository;
 import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinanceTime;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.Year;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
 import com.parksungbum.kakaopaytask3.service.dto.*;
-import com.parksungbum.kakaopaytask3.service.exception.DoesNotMatchYearException;
 import org.apache.commons.math3.stat.regression.SimpleRegression;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,6 +16,8 @@ import java.util.List;
 
 @Service
 public class FundService {
+    private static final int START_YEAR = 2005;
+    private static final int END_YEAR = 2017;
     public static final int NEXT_YEAR = 2018;
     private final FundRepository fundRepository;
 
@@ -31,43 +33,43 @@ public class FundService {
 
     @Transactional(readOnly = true)
     public List<AnnualFundStatisticsResponseDto> findAllAnnualFundStatistics() {
-        List<Object[]> annualTotalFunds = fundRepository.findAllAnnualTotalFund();
-        List<AnnualFundStatisticsResponseDto> annualFundStatistics =
-                assembleAnnualTotalFunds(annualTotalFunds);
-
-        List<Object[]> annualInstitutionFunds = fundRepository.findAllAnnualInstitutionFund();
-        assembleAnnualInstitutionFunds(annualFundStatistics, annualInstitutionFunds);
-
-        return annualFundStatistics;
-    }
-
-    private List<AnnualFundStatisticsResponseDto> assembleAnnualTotalFunds(final List<Object[]> annualTotalFunds) {
         List<AnnualFundStatisticsResponseDto> annualFundStatistics = new ArrayList<>();
 
-        for (Object[] annualTotalFund : annualTotalFunds) {
-            AnnualFundStatisticsResponseDto annualFundStatisticsResponseDto = new AnnualFundStatisticsResponseDto();
-            annualFundStatisticsResponseDto.setYear(Integer.parseInt(annualTotalFund[0].toString()));
-            annualFundStatisticsResponseDto.setTotalAmount(Integer.parseInt(annualTotalFund[1].toString()));
+        for (int i = START_YEAR; i <= END_YEAR; ++i) {
+            Year currentYear = new Year(i);
+            int totalAmount = fundRepository.findALLByHousingFinanceTime_Year(currentYear).stream()
+                    .map(Fund::getAmount)
+                    .reduce(0, Integer::sum)
+                    ;
+
+            List<InstitutionTotalAmountDto> institutionTotalAmountDtos =
+                    createInstitutionTotalAmounts(currentYear);
+
+            AnnualFundStatisticsResponseDto annualFundStatisticsResponseDto =
+                    new AnnualFundStatisticsResponseDto(i, totalAmount, institutionTotalAmountDtos);
             annualFundStatistics.add(annualFundStatisticsResponseDto);
         }
 
         return annualFundStatistics;
     }
 
-    private void assembleAnnualInstitutionFunds(final List<AnnualFundStatisticsResponseDto> annualFundStatistics,
-                                                final List<Object[]> annualInstitutionFunds) {
-        for (Object[] institutionFund : annualInstitutionFunds) {
-            AnnualFundStatisticsResponseDto currentYearSupportAmount =
-                    annualFundStatistics.stream()
-                            .filter(dto -> dto.getYear() == Integer.parseInt(institutionFund[0].toString()))
-                            .findAny()
-                            .orElseThrow(DoesNotMatchYearException::new);
+    private List<InstitutionTotalAmountDto> createInstitutionTotalAmounts(Year currentYear) {
+        List<InstitutionTotalAmountDto> institutionTotalAmountDtos = new ArrayList<>();
+        for (InstitutionCode value : InstitutionCode.values()) {
+            String institutionName = value.getName();
+            int totalAmountByInstitution =
+                    fundRepository.findAllByHousingFinanceTime_YearAndInstitution_Name(currentYear, institutionName)
+                            .stream()
+                            .map(Fund::getAmount)
+                            .reduce(0, Integer::sum)
+                    ;
 
             InstitutionTotalAmountDto institutionTotalAmountDto =
-                    new InstitutionTotalAmountDto(institutionFund[1].toString(),
-                            Integer.parseInt(institutionFund[2].toString()));
-            currentYearSupportAmount.getDetailAmount().add(institutionTotalAmountDto);
+                    new InstitutionTotalAmountDto(institutionName, totalAmountByInstitution);
+            institutionTotalAmountDtos.add(institutionTotalAmountDto);
         }
+
+        return institutionTotalAmountDtos;
     }
 
     @Transactional(readOnly = true)

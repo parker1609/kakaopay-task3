@@ -19,7 +19,7 @@ public class Institution extends BaseEntity {
         this.code = code;
     }
 
-    private Institution() {
+    public Institution() {
     }
 
     public String getName() {

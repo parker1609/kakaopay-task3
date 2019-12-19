@@ -8,6 +8,15 @@ public class AnnualFundStatisticsResponseDto {
     private int totalAmount;
     private List<InstitutionTotalAmountDto> detailAmount = new ArrayList<>();
 
+    public AnnualFundStatisticsResponseDto(int year, int totalAmount, List<InstitutionTotalAmountDto> detailAmount) {
+        this.year = year;
+        this.totalAmount = totalAmount;
+        this.detailAmount = detailAmount;
+    }
+
+    public AnnualFundStatisticsResponseDto() {
+    }
+
     public int getYear() {
         return year;
     }
