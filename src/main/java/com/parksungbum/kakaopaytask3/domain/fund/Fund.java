@@ -1,7 +1,7 @@
 package com.parksungbum.kakaopaytask3.domain.fund;
 
 import com.parksungbum.kakaopaytask3.domain.BaseEntity;
-import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinanceTime;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 
 import javax.persistence.*;
@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Fund extends BaseEntity {
 
     @ManyToOne
-    private HousingFinance housingFinance;
+    private HousingFinanceTime housingFinanceTime;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "institution_id")
@@ -18,8 +18,8 @@ public class Fund extends BaseEntity {
 
     private int amount;
 
-    public Fund(final HousingFinance housingFinance, final Institution institution, final int amount) {
-        this.housingFinance = housingFinance;
+    public Fund(final HousingFinanceTime housingFinanceTime, final Institution institution, final int amount) {
+        this.housingFinanceTime = housingFinanceTime;
         this.institution = institution;
         this.amount = amount;
     }
@@ -27,8 +27,8 @@ public class Fund extends BaseEntity {
     private Fund() {
     }
 
-    public HousingFinance getHousingFinance() {
-        return housingFinance;
+    public HousingFinanceTime getHousingFinanceTime() {
+        return housingFinanceTime;
     }
 
     public Institution getInstitution() {

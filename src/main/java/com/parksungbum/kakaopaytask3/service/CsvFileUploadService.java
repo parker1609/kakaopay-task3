@@ -1,6 +1,6 @@
 package com.parksungbum.kakaopaytask3.service;
 
-import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinanceTime;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
 import com.parksungbum.kakaopaytask3.service.dto.FileUploadResponseDto;
@@ -81,17 +81,17 @@ public class CsvFileUploadService {
         for (List<String> bodyRow : body) {
             int year = integerConverter.convert(bodyRow.get(YEAR_INDEX));
             int month = integerConverter.convert(bodyRow.get(MONTH_INDEX));
-            HousingFinance housingFinance = housingFinanceService.save(year, month);
-            createFundWithLine(bodyRow, housingFinance);
+            HousingFinanceTime housingFinanceTime = housingFinanceService.save(year, month);
+            createFundWithLine(bodyRow, housingFinanceTime);
         }
     }
 
-    private void createFundWithLine(final List<String> bodyRow, final HousingFinance housingFinance) {
+    private void createFundWithLine(final List<String> bodyRow, final HousingFinanceTime housingFinanceTime) {
         for (int i = START_INSTITUTION_INDEX; i < bodyRow.size(); i++) {
             Long institutionId = (long) (i - 1);
             Institution institution = institutionService.findById(institutionId);
             int amount = integerConverter.convert(bodyRow.get(i));
-            fundService.save(housingFinance, institution, amount);
+            fundService.save(housingFinanceTime, institution, amount);
         }
     }
 }

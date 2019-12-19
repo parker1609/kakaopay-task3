@@ -2,7 +2,7 @@ package com.parksungbum.kakaopaytask3.service;
 
 import com.parksungbum.kakaopaytask3.domain.fund.Fund;
 import com.parksungbum.kakaopaytask3.domain.fund.FundRepository;
-import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinanceTime;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import com.parksungbum.kakaopaytask3.domain.institution.InstitutionCode;
 import com.parksungbum.kakaopaytask3.service.dto.*;
@@ -23,8 +23,8 @@ public class FundService {
         this.fundRepository = fundRepository;
     }
 
-    public Fund save(HousingFinance housingFinance, Institution institution, int amount) {
-        Fund fund = new Fund(housingFinance, institution, amount);
+    public Fund save(HousingFinanceTime housingFinanceTime, Institution institution, int amount) {
+        Fund fund = new Fund(housingFinanceTime, institution, amount);
 
         return fundRepository.save(fund);
     }

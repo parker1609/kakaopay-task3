@@ -2,7 +2,7 @@ package com.parksungbum.kakaopaytask3.service;
 
 import com.parksungbum.kakaopaytask3.domain.fund.Fund;
 import com.parksungbum.kakaopaytask3.domain.fund.FundRepository;
-import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinance;
+import com.parksungbum.kakaopaytask3.domain.housingfinance.HousingFinanceTime;
 import com.parksungbum.kakaopaytask3.domain.institution.Institution;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -29,7 +29,7 @@ public class FundServiceTest {
     private Fund fund;
 
     @Mock
-    private HousingFinance housingFinance;
+    private HousingFinanceTime housingFinanceTime;
 
     @Mock
     private Institution institution;
@@ -39,7 +39,7 @@ public class FundServiceTest {
     void save_institution() {
         given(fundRepository.save(any(Fund.class))).willReturn(fund);
 
-        fundService.save(housingFinance, institution, AMOUNT);
+        fundService.save(housingFinanceTime, institution, AMOUNT);
 
         verify(fundRepository).save(any(Fund.class));
     }
